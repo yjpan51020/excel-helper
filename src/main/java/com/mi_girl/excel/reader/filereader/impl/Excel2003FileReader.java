@@ -40,10 +40,10 @@ public class Excel2003FileReader extends ExcelFileReader{
 	}
 	
 	/**
-	 * ���ݴ�������ݶ�ȡ��Ӧ�����ݷ���
-	 * @param sheetIndex   Ҫ��ȡ�ı���±�
-	 * @param startIndex   Ҫ��ȡ���ݵĿ�ʼ�±�
-	 * @param endIndex     Ҫ��ȡ���ݵĽ�β�±�
+	 * 读取2003Excel并返回结果
+	 * @param sheetIndex   表下标
+	 * @param startIndex   数据开始下标
+	 * @param endIndex     数据结束下标
 	 * @return
 	 */
 	public FileReadResult readExcel(int sheetIndex,int startIndex,int endIndex){
@@ -51,7 +51,7 @@ public class Excel2003FileReader extends ExcelFileReader{
 		try{
 			excelFileIn=initExcelFileIn(filePath);
 			validateParam(sheetIndex,startIndex,endIndex);
-			//��ȡsheet����
+			//获取sheet
 	        Sheet sheet=initSheet(sheetIndex,excelFileIn);
 	        AssertUtil.notNull(sheet, "根据下标获取sheet为空");
 	        List<Map<String,String>> result= readExcel(sheet, startIndex, endIndex);
@@ -65,7 +65,7 @@ public class Excel2003FileReader extends ExcelFileReader{
 
 	private List<Map<String,String>> readExcel(Sheet sheet,int startIndex,int endIndex){
         endIndex=getEndIndex(endIndex,sheet.getLastRowNum());
-        //��ȡ��ͷ��Ϣ
+        //初始化表头信息
         initsheetHeadData(sheet);
         List<Map<String,String>> result=parseSheetData(sheet, startIndex, endIndex);
         return result;
@@ -87,7 +87,7 @@ public class Excel2003FileReader extends ExcelFileReader{
 		if(this.sheetHeadData!=null&&this.sheetHeadData.size()>0){
 			return;
 		}
-		 //���ݴ���ʱ���ޱ�ͷ��Ϣ��Ĭ�ϴӳ�ʼ������ʱָ���ı�ͷ
+		 //获取行对象
         Row row=sheet.getRow(this.sheetHeadIndex);
         if(row==null||row.getPhysicalNumberOfCells()<=0){
             throw new RuntimeException("初始化表头信息失败，无法正常获取数据");
@@ -103,20 +103,20 @@ public class Excel2003FileReader extends ExcelFileReader{
 	
 	private List<Map<String,String>> parseSheetData(Sheet sheet,int startIndex,int endIndex){
 		List<Map<String,String>> result=new ArrayList<Map<String,String>>();
-        //��ʼ��ȡ����
+        //开始读取数据
         for (int i = startIndex; i <= endIndex; i++) {
             Row row = sheet.getRow(i);
-            //����ÿ�����ݲ����뼯����
+            //解析后的结果
             Map<String,String> rowData=parseRow(row);
             if(rowData!=null){
-                //�����ݲ�Ϊ�ղŸ�ֵ
+                //不为空则保存ֵ
                 result.add(rowData);
             }
         }
         return result;
 	}
 	
-	//����ÿ�����ݳ�ExcelData�ļ���
+	//将行数据转换成MAP
 	private Map<String,String> parseRow(Row row){
         if(row==null){
             return null;
@@ -124,14 +124,14 @@ public class Excel2003FileReader extends ExcelFileReader{
         Map<String,String> linked = new HashMap<String,String>();
         for (int j = row.getFirstCellNum(); j < this.sheetHeadData.size(); j++) {
             Cell cell = row.getCell(j);
-            //��ȡÿ����Ԫ�񲢸�ֵ
+            //解析每一个单元格数据ֵ
             linked.put(this.sheetHeadData.get(j), cellValueConvert.getCellData(cell));
         }
-        //���������ݣ��ж��Ƿ�����Ϊ��
+        //过滤空数据
         return filterEmptyData(linked);
     }
     
-    //�����������Ƿ�ȫΪ��(������һ������value��Ϊ�ռ���Ϊ������)�����ȫΪ���򷵻ؿ�
+    //过滤空数据
 	private Map<String,String> filterEmptyData(Map<String,String> linked){
         if(linked==null||linked.size()==0){
             return null;

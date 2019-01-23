@@ -6,9 +6,9 @@ public class ExcelPointGenerater {
 			"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
 	/**
-	 * ��ȡexcel������
-	 * @param index
-	 * @return
+	 * 获取2007列坐标
+	 * @param index 当前列下标
+	 * @return 返回列坐标字符
 	 */
 	public static String generaterColumnPoint(int index) {
 		int current = index % 26;

@@ -12,7 +12,7 @@ public class TestExcelWriter {
 	
     public static void main(String[] args) throws InterruptedException {
     	long start=System.currentTimeMillis();
-    	ClazzObjectExcelWriterConfig clazzObjectExcelWriterConfig=new ClazzObjectExcelWriterConfig();
+    	ClazzObjectExcelWriterConfig   clazzObjectExcelWriterConfig=new ClazzObjectExcelWriterConfig();
 		ExcelFileWriter excelFileWriter=ExcelFileWriterFactory.getInstantce(clazzObjectExcelWriterConfig);
 		excelFileWriter.writeToExcel();
 		System.out.println("消耗时间为:"+(System.currentTimeMillis()-start));

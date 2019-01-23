@@ -21,7 +21,7 @@ public abstract class ExcelFileReader {
 		validateTableHeadConfig();
 	}
 
-	//��֤��ͷ��Ϣ
+	//验证表头配置信息
 	protected void validateTableHeadConfig() {
 		if(this.sheetHeadIndex!=null&&this.sheetHeadIndex>=0){
 			return;
@@ -30,21 +30,21 @@ public abstract class ExcelFileReader {
 	}
 	
 	/**
-	 * ���ݴ�������ݶ�ȡ��Ӧ�����ݷ���
-	 * @param sheetIndex   Ҫ��ȡ�ı���±�
-	 * @param startIndex   Ҫ��ȡ���ݵĿ�ʼ�±�
-	 * @param endIndex     Ҫ��ȡ���ݵĽ�β�±�
-	 * @return
+	 * 读取EXCEL
+	 * @param sheetIndex   表下标
+	 * @param startIndex   数据开始下标
+	 * @param endIndex     数据结束下标
+	 * @return 文件读取结果
 	 */
 	public abstract FileReadResult readExcel(int sheetIndex,int startIndex,int endIndex);
 
-	//��֤��ȡ����
+	//验证参数信息
 	protected void validateParam(int sheetIndex, int startIndex, int endIndex) {
 		AssertUtil.equalOrMoreThan(sheetIndex, 0, "要读取的sheetIndex不允许小于0");
 		validateReadIndex(startIndex, endIndex);
 	}
 	
-	//��֤��ȡ�±�
+	//验证读取数据下标是否符合
 	protected void validateReadIndex(int startIndex, int endIndex){
 		AssertUtil.equalOrMoreThan(startIndex, 0, "读取数据的开始下标必须大于等于0");
 		if(endIndex>=0){

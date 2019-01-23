@@ -17,7 +17,7 @@ public abstract class ExcelWriterConfigSupport implements ExcelWriterConfig {
 	 * 每列的样式
 	 * @param wb        excel对象
 	 * @param cellIndex 当前列的下标
-	 * @return
+	 * @return 返回样式
 	 */
 	@Override
 	public CellStyle getCellStyle(Workbook wb, int cellIndex) {

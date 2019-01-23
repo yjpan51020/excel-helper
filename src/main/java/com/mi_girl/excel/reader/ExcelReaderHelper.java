@@ -15,7 +15,6 @@ import com.mi_girl.excel.reader.util.ObjectMapConverterUtil;
 /**
  * 此类做为读取excel转换成java对象的主入口类
  * @author panyujiang
- * @date   2017-05-17
  */
 public class ExcelReaderHelper <T>{
 	
@@ -28,12 +27,11 @@ public class ExcelReaderHelper <T>{
 	}
 
 	/**
-	 * ÿ�ζ�ȡ�����ʼ��һ��excel�ļ���ȡ����
-	 * ��ֹ�쳣�׳�δ�����쳣��������δ�رյ�����
-	 * @param sheetIndex
-	 * @param startIndex
-	 * @param endIndex
-	 * @return
+	 * 读取EXCEL并返回结果
+	 * @param sheetIndex 表下标
+	 * @param startIndex 开始数据下标
+	 * @param endIndex 结束下标
+	 * @return 读取结果
 	 */
 	public ReadExcelResult<T> readExcel(int sheetIndex,int startIndex,int endIndex){
 		ExcelFileReader reader=initExcelFileReader();

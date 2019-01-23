@@ -20,7 +20,6 @@ import com.mi_girl.excel.writer.config.ExcelWriterConfig;
 /**
  * 此类做为写入excel的主入口类
  * @author panyujiang
- * @date   2017-05-17
  */
 public abstract class ExcelFileWriter {
 	
@@ -65,8 +64,7 @@ public abstract class ExcelFileWriter {
     }
 
 	/**
-     * ������д��excel������ǰexcel���ݴ����������ʱ�����Զ�����һ����Ȼ�����д��
-     * @param excelData
+     * 开始写入数据
      */
     public void writeToExcel(){
     	try{
@@ -117,13 +115,12 @@ public abstract class ExcelFileWriter {
 	}
 
 	/**
-     * ���ھ�������ʵ��
+     * 初始化BOOK对象
      */
     protected abstract void initWorkbook();
 
 	/**
-     * �ж��Ƿ�ǰsheet���е������������ڵ������
-     * @param currentLastRowIndex
+     * 最大行数处理
      */
     private void maxRowCountHandle(){
     	if(!isMoreThenOrEqualsMaxCount()){
@@ -132,12 +129,12 @@ public abstract class ExcelFileWriter {
     	initNewSheet();
     }
     
-    //��֤��ǰ�������Ƿ��Ѿ��������ֵ  ������ֵС��0��������
+    //验证是否超出最大行数
     private boolean isMoreThenOrEqualsMaxCount(){
     	return currentExcelWriterConfig.sheetMaxRow()>0&&currentRowIndex>=currentExcelWriterConfig.sheetMaxRow();
     }
     
-    //����һ���µ�sheet
+    //创建新的表
     private void initNewSheet() {
     	this.sheetIndex++;
 		this.currentSheet=wb.createSheet(currentExcelWriterConfig.SheetName(this.sheetIndex));
@@ -173,10 +170,10 @@ public abstract class ExcelFileWriter {
 	}
 
 	/**
-	 * ����һ����Ԫ�񲢽���ʽ������д��
-	 * @param row         ��ǰ�ж���
-	 * @param cellData    ��ǰ��Ԫ������
-	 * @param cellIndex   ��ǰ��Ԫ���±�
+	 * 创建单元格
+	 * @param row         行对象
+	 * @param cellData    单元格数据
+	 * @param cellIndex   单元格下标
 	 */
 	private void createNewCell(Row row, String cellData,int cellIndex) {
 		if(row==null){

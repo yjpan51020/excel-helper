@@ -2,13 +2,36 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mi-girl</groupId>
-	<artifactId>excel</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.github.yjpan51020</groupId>
+	<artifactId>excel-helper</artifactId>
+	<version>0.0.1-RELEASE</version>
 	<packaging>jar</packaging>
+	<description>excel-helper</description>
+	<name>excel-helper</name>
+	<url>https://github.com/yjpan51020/excel-helper</url>
 
-	<name>excel</name>
-	<url>http://maven.apache.org</url>
+	<licenses>
+		<license>
+			<name>The ApacheSoftware License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+
+	<developers>
+		<developer>
+			<name>yjpan51020</name>
+			<email>3517301990@qq.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<tag>master</tag>
+		<connection>https://github.com/yjpan51020/excel-helper.git</connection>
+		<developerConnection>https://github.com/yjpan51020/</developerConnection>
+		<url>https://github.com/yjpan51020/excel-helper.git</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,14 +48,106 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.15</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
-		<!-- https://mvnrepository.com/artifact/xerces/xerces -->
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xerces</artifactId>
 			<version>2.4.0</version>
 		</dependency>
 
-
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+
+		<profile>
+
+			<id>release</id>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.0.2</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
+					</plugin>
+					<!-- Source -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Javadoc -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- GPG -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+
+			</build>
+
+			<distributionManagement>
+				<snapshotRepository>
+					<id>sonatype</id>
+					<url>
+						https://oss.sonatype.org/content/repositories/snapshots/
+					</url>
+				</snapshotRepository>
+				<repository>
+					<id>sonatype</id>
+					<url>
+						https://oss.sonatype.org/service/local/staging/deploy/maven2/
+					</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
 </project>
