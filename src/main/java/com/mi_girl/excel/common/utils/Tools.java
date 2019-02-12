@@ -1,5 +1,6 @@
 package com.mi_girl.excel.common.utils;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.Map;
 
@@ -41,6 +42,33 @@ public class Tools {
 		}catch(Exception e){
 		   return false;
 		}
+	}
+	
+	/**
+	 * 判断是否为基础数据类型或其包装类
+	 * @param clx 类型
+	 * @return 真假
+	 */
+	public static boolean isBasicDataTypes(Class<?> clx){
+		if(Boolean.class==clx){
+			return true;
+		}
+		if(Character.class==clx){
+			return true;
+		}
+		if(clx.isPrimitive()){
+			return true;
+		}
+		return Number.class.isAssignableFrom(clx);
+	}
+	
+	/**
+	 * 获取类泛型的字节码对象
+	 * @return 字节码
+	 */
+	public static Class<?> getTClass(Class<?> clx) {
+		ParameterizedType genericSuperclass = (ParameterizedType) clx.getGenericSuperclass();
+		return (Class<?>) genericSuperclass.getActualTypeArguments()[0];
 	}
 
 }
