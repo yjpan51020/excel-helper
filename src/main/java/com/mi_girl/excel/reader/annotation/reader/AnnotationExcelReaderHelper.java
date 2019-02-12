@@ -20,7 +20,7 @@ public class AnnotationExcelReaderHelper <T>{
 	
 	public AnnotationExcelReaderHelper(Class<T> clx,String filePath) {
 		AnnotationExcelReaderConfig<T> annotationExcelReaderConfig=createReaderConfig(clx,filePath);
-		excelReaderHelper=new ExcelReaderHelper<>(annotationExcelReaderConfig);
+		excelReaderHelper=new ExcelReaderHelper<T>(annotationExcelReaderConfig);
 	}
 	
 	/**

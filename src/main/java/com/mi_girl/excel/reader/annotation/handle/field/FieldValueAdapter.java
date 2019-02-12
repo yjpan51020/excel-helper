@@ -12,7 +12,7 @@ public class FieldValueAdapter {
 	private final static Set<FieldValueConverter> CONVERTERS;
 	
 	static{
-		CONVERTERS=new HashSet<>();
+		CONVERTERS=new HashSet<FieldValueConverter>();
 		CONVERTERS.add(new BasicDataTypesFieldValueConverter());
 		CONVERTERS.add(new DateTypeFieldValueConverter());
 		CONVERTERS.add(new StringTypeFieldValueConverter());

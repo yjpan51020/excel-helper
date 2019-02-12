@@ -47,7 +47,7 @@ public class AnnotationExcelReaderConfig<T> implements ExcelReadConfig<T> {
 		if (fields == null || fields.length == 0) {
 			return null;
 		}
-		List<Field> fieldList = new ArrayList<>();
+		List<Field> fieldList = new ArrayList<Field>();
 		for (Field field : fields) {
 			if (field.getAnnotation(ExcelField.class) == null) {
 				continue;

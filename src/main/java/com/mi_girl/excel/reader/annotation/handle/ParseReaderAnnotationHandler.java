@@ -36,7 +36,7 @@ public class ParseReaderAnnotationHandler {
 				continue;
 			}
 			if (result == null) {
-				result = new HashMap<>();
+				result = new HashMap<String, ExcelFieldFormatter>();
 			}
 			result.put(field.getName(), getExcelFieldFormatter(formatter));
 		}
@@ -61,7 +61,7 @@ public class ParseReaderAnnotationHandler {
 				continue;
 			}
 			if (result == null) {
-				result = new HashMap<>();
+				result = new HashMap<String, String>();
 			}
 			result.put(excelField.column(), field.getName());
 		}
@@ -95,7 +95,7 @@ public class ParseReaderAnnotationHandler {
 	}
 
 	private static List<String> convert2SheetHeadData(List<ExcelField> excelFields) {
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<String>();
 		for (ExcelField excelField : excelFields) {
 			result.add(excelField.column());
 		}
@@ -116,7 +116,7 @@ public class ParseReaderAnnotationHandler {
 				continue;
 			}
 			if (result == null) {
-				result = new ArrayList<>();
+				result = new ArrayList<ExcelField>();
 			}
 			result.add(excelField);
 		}
@@ -176,7 +176,7 @@ public class ParseReaderAnnotationHandler {
 				continue;
 			}
 			if (hasAnnotationFields == null) {
-				hasAnnotationFields = new ArrayList<>();
+				hasAnnotationFields = new ArrayList<Field>();
 			}
 			hasAnnotationFields.add(field);
 		}
